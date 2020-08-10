@@ -1,0 +1,26 @@
+Q3. How do you find the largest and smallest number in an unsorted integer array?
+
+Ans:
+Approach: A simple solution is to sort the given array using a O(N log N) sorting algorithm like Merge Sort, Heap Sort, etc and return the element at index 0 and n-1 
+in the sorted array.
+
+ 
+# Function to return the smallest  and largest element in a given array  
+def SmallBig(arr, n): 
+  
+    # Sort the given array  
+    arr.sort() 
+  
+    # Return 0'th and n-1'th element in the sorted array  
+    return arr[0]
+    return arr[n-1]
+  
+# Driver code 
+if __name__=='__main__': 
+    arr = [12, 3, 5, 7, 19] 
+    n = len(arr) 
+    k = 2
+    print("The smallest and largest elements are", 
+          SmallBig(arr, n)) 
+
+Time Complexity : O(n.logn)
