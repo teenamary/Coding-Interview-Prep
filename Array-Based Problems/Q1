@@ -1,4 +1,4 @@
-Q1. How do you find the missing number in a given integer array of 1 to 100?
+Q1. How do you find the missing number in a given integer array?
 
 Ans:
 Approach: The length of the array is n-1. So the sum of all n elements, i.e sum of numbers from 1 to n can be calculated using the formula n*(n+1)/2. 
