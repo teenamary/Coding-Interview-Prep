@@ -1,0 +1,306 @@
+Q1. How do you find the missing number in a given integer array of 1 to 100?
+
+Ans:
+Approach: The length of the array is n-1. So the sum of all n elements, i.e sum of numbers from 1 to n can be calculated using the formula n*(n+1)/2. 
+Now find the sum of all the elements in the array and subtract it from the sum of first n natural numbers, it will be the value of the missing element.
+Algorithm:
+Calculate the sum of first n natural numbers as sumtotal= n*(n+1)/2
+create a variable sum to store the sum of array elements.
+Traverse the array from start to end.
+Update the value of sum as sum = sum + array[i]
+print the missing number as sumtotal – sum
+
+# getMissingNo takes list as argument 
+def getMissingNo(A): 
+    n = len(A) 
+    total = (n + 1)*(n + 2)/2
+    sum_of_A = sum(A) 
+    return total - sum_of_A 
+  
+# Driver program to test the above function 
+A = [1, 2, 4, 5, 6] 
+miss = getMissingNo(A) 
+print(miss)
+
+Compelxity Analysis:
+Time Complexity: O(n).
+Only one traversal of array is needed.
+Space Complexity: O(1).
+No extra space is needed
+
+*********************************************************************************************************************************************************************************
+
+Q2. How do you find the duplicate number on a given integer array?
+
+Ans:
+Approach: Traverse the array once. While traversing, keep track of count of all elements in the array using a temp array count[] of size n, when you see an element 
+whose count is already set, print it as duplicate.
+
+This method uses the range given in the question to restrict the size of count[], but doesn’t use the data that there are only two repeating elements.
+# Python3 code for Find the two repeating  
+# elements in a given array 
+  
+  
+def printRepeating(arr,size) : 
+    count = [0] * size 
+    print(" Repeating elements are ",end = "") 
+    for i in range(0, size) : 
+        if(count[arr[i]] == 1) : 
+            print(arr[i], end = " ") 
+        else : 
+            count[arr[i]] = count[arr[i]] + 1
+  
+  
+# Driver code 
+arr = [4, 2, 4, 5, 2, 3, 1] 
+arr_size = len(arr) 
+printRepeating(arr, arr_size) 
+
+Time Complexity: O(n)
+Auxiliary Space: O(n)
+
+*******************************************************************************************************************************************************************************
+
+Q3. How do you find the largest and smallest number in an unsorted integer array?
+
+Ans:
+Approach: A simple solution is to sort the given array using a O(N log N) sorting algorithm like Merge Sort, Heap Sort, etc and return the element at index 0 and n-1 
+in the sorted array.
+
+ 
+# Function to return the smallest  and largest element in a given array  
+def SmallBig(arr, n): 
+  
+    # Sort the given array  
+    arr.sort() 
+  
+    # Return 0'th and n-1'th element in the sorted array  
+    return arr[0]
+    return arr[n-1]
+  
+# Driver code 
+if __name__=='__main__': 
+    arr = [12, 3, 5, 7, 19] 
+    n = len(arr) 
+    k = 2
+    print("The smallest and largest elements are", 
+          SmallBig(arr, n)) 
+
+Time Complexity : O(n.logn)
+
+******************************************************************************************************************************************************************************
+
+Q4. How do you find all pairs of an integer array whose sum is equal to a given number?
+
+Ans:
+Approach: A simple solution is be traverse each element and check if there’s another number in the array which can be added to it to give sum.
+
+# Python3 implementation of simple method to find count of pairs with given sum. 
+  
+# Returns number of pairs in arr[0..n-1]  with sum equal to 'sum' 
+def getPairsCount(arr, n, sum): 
+      
+    count = 0 # Initialize result 
+  
+    # Consider all possible pairs 
+    # and check their sums 
+    for i in range(0, n): 
+        for j in range(i + 1, n): 
+            if arr[i] + arr[j] == sum: 
+                count += 1
+      
+    return count 
+  
+# Driver function  
+arr = [1, 5, 7, -1, 5] 
+n = len(arr) 
+sum = 6
+print("Count of pairs is", 
+      getPairsCount(arr, n, sum)) 
+
+Time Complexity : O(n^2)
+Auxiliary Space : O(1)
+
+******************************************************************************************************************************************************************************
+
+Q5. How do you find duplicate numbers in an array if it contains multiple duplicates?
+
+Approach: The basic idea is to use a HashMap to solve the problem. But there is a catch, the numbers in the array are from 0 to n-1, and the input array has length n. 
+So, the input array can be used as a HashMap. While Traversing the array, if an element ‘a’ is encountered then increase the value of a%n‘th element by n. The frequency 
+can be retrieved by dividing the a % n’th element by n.
+Algorithm:
+Traverse the given array from start to end.
+For every element in the array increment the arr[i]%n‘th element by n.
+Now traverse the array again and print all those indexes i for which arr[i]/n is greater than 1. Which guarantees that the number n has been added to that index
+This approach works because all elements are in the range from 0 to n-1 and arr[i] would be greater than n only if a value “i” has appeared more than once.
+
+# Python3 code to find duplicates in O(n) time 
+numRay = [0, 4, 3, 2, 7, 8, 2, 3, 1]; 
+arr_size = len(numRay);  
+for i in range(arr_size): 
+   
+    numRay[numRay[i] % arr_size] = numRay[numRay[i] % arr_size] +arr_size; 
+   
+print("The repeating elements are : "); 
+for i in range(arr_size): 
+    if (numRay[i] >= arr_size*2):  
+        print(i, " ");
+        
+Complexity Anlaysis:
+Time Complexity: O(n).
+Only two traversals are needed. So the time complexity is O(n).
+Auxiliary Space: O(1).
+No extra space is needed, so the space complexity is constant.
+
+******************************************************************************************************************************************************************************
+
+Q6. How are duplicates removed from a given array?
+
+Ans:
+Approach: Sort the elements. Create an auxiliary array temp[] to store unique elements.
+Traverse input array and one by one copy unique elements of arr[] to temp[]. Also keep track of count of unique elements. Let this count be j.
+Copy j elements from temp[] to arr[] and return j.
+
+# Python3 program to remove duplicates Function to remove duplicate elements 
+  
+# This function returns new size of modified array. 
+def removeDuplicates(arr, n): 
+  
+    # Return, if array is  empty or contains a single element 
+    if n == 0 or n == 1: 
+        return n 
+  
+    temp = list(range(n)) 
+  
+    # Start traversing elements 
+    j = 0; 
+    for i in range(0, n-1): 
+  
+        # If current element is not equal to next element then store that current element 
+        if arr[i] != arr[i+1]: 
+            temp[j] = arr[i] 
+            j += 1
+  
+    # Store the last element as whether it is unique or repeated, it hasn't stored previously 
+    temp[j] = arr[n-1] 
+    j += 1
+      
+    # Modify original array 
+    for i in range(0, j): 
+        arr[i] = temp[i] 
+  
+    return j 
+  
+# Driver code 
+arr = [1, 2, 2, 3, 4, 4, 4, 5, 5] 
+n = len(arr) 
+  
+# removeDuplicates() returns 
+# new size of array. 
+n = removeDuplicates(arr, n) 
+  
+# Print updated array 
+for i in range(n): 
+    print ("%d"%(arr[i]), end = " ") 
+
+Time Complexity : O(n)
+Auxiliary Space : O(n)
+
+******************************************************************************************************************************************************************************
+
+Q7. How is an integer array sorted in place using the quicksort algorithm?
+
+Ans:
+
+# Python program for implementation of Quicksort Sort 
+  
+# This function takes last element as pivot, places the pivot element at its correct position in sorted array, and places all smaller (smaller than pivot) 
+# to left of pivot and all greater elements to right of pivot 
+def partition(arr,low,high): 
+    i = ( low-1 )         # index of smaller element 
+    pivot = arr[high]     # pivot 
+  
+    for j in range(low , high): 
+  
+        # If current element is smaller than the pivot 
+        if   arr[j] < pivot: 
+          
+            # increment index of smaller element 
+            i = i+1 
+            arr[i],arr[j] = arr[j],arr[i] 
+  
+    arr[i+1],arr[high] = arr[high],arr[i+1] 
+    return ( i+1 ) 
+  
+# The main function that implements QuickSort 
+# arr[] --> Array to be sorted, 
+# low  --> Starting index, 
+# high  --> Ending index 
+  
+# Function to do Quick sort 
+def quickSort(arr,low,high): 
+    if low < high: 
+  
+        # pi is partitioning index, arr[p] is now at right place 
+        pi = partition(arr,low,high) 
+  
+        # Separately sort elements before partition and after partition 
+        quickSort(arr, low, pi-1) 
+        quickSort(arr, pi+1, high) 
+  
+# Driver code to test above 
+arr = [10, 7, 8, 9, 1, 5] 
+n = len(arr) 
+quickSort(arr,0,n-1) 
+print ("Sorted array is:") 
+for i in range(n): 
+    print ("%d" %arr[i])
+
+Time taken by QuickSort in general can be written as following.
+
+ T(n) = T(k) + T(n-k-1) + θ(n)
+ 
+ *****************************************************************************************************************************************************************************
+ 
+ Q8. How do you reverse an array in place?
+ 
+ Ans:
+ # Iterative python program to reverse an array 
+  
+# Function to reverse A[] from start to end 
+def reverseList(A, start, end): 
+    while start < end: 
+        A[start], A[end] = A[end], A[start] 
+        start += 1
+        end -= 1
+  
+# Driver function to test above function 
+A = [1, 2, 3, 4, 5, 6] 
+print(A) 
+reverseList(A, 0, 5) 
+print("Reversed list is") 
+print(A)
+
+Time Complexity : O(n)
+
+OOOOORRRRRRRR
+
+# Recursive python program to reverse an array 
+  
+# Function to reverse A[] from start to end 
+def reverseList(A, start, end): 
+    if start >= end: 
+        return
+    A[start], A[end] = A[end], A[start] 
+    reverseList(A, start+1, end-1) 
+  
+# Driver function to test above function 
+A = [1, 2, 3, 4, 5, 6] 
+print(A) 
+reverseList(A, 0, 5) 
+print("Reversed list is") 
+print(A)
+
+Time Complexity : O(n)
+
+******************************************************************************************************************************************************************************
